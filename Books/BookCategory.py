@@ -12,7 +12,8 @@ class BookCategory:
 
     def find_books(self, query):
         results = [book for book in self.books if query.lower()
-                   in book.title.lower()]
+                   in book["title"].lower()]
+        return results
         for subcategory in self.subcategories:
             results.extend(subcategory.find_books(query))
         return results

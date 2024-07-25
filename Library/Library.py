@@ -57,21 +57,16 @@ class Library:
     def add_book_to_category(self, book, category_name):
         category = self.find_category(self.root_category, category_name)
         if category:
-            print("1")
             category.add_book(book)
             self.notifier.notify(
                 f"New book arrived in our library: {book.title} by {book.author}")
         else:
             self.add_category(category_name)
-            print({
-                "title": book.title,
-                "author": book.author,
-                "category": book.category
-            })
             self.root_category.add_book({
                 "title": book.title,
                 "author": book.author,
-                "category": book.category
+                "category": book.category,
+                "is_available": book.is_available
             })
 
     def search_books(self, query):
@@ -84,7 +79,6 @@ class Library:
         eligibility_handler = UserEligibilityHandler(availability_handler)
         limit_handler = BorrowLimitHandler(eligibility_handler)
 
-        # Start processing the request
         return limit_handler.handle_request(user_id, book_title)
 
     def return_book(self, user_id: int, book_title: str) -> bool:
@@ -92,11 +86,11 @@ class Library:
         if not user:
             return False
         book = next(
-            (b for b in user.borrowed_books if b.title == book_title), None)
+            (b for b in user.borrowed_books if b.get('title', '').lower() == book_title.lower()), None)
         if book:
             has_returned = user.return_book(book)
             if has_returned:
                 self.notifier.notify(
-                    f"Book returned: {book.title} by {user.name}")
+                    f"Book returned: {book.get('title', '')} by {user.name}")
             return has_returned
         return False
