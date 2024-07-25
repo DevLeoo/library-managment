@@ -3,15 +3,16 @@ from Library.LibraryFacade import LibraryFacadeSingleton
 
 app = Flask(__name__)
 
-# @app.errorhandler(Exception)
-# def handle_exception(error):
-#     # Create a default response
-#     print(error)
-#     response = {
-#         "error": "An unexpected error occurred.",
-#         "message": str(error)
-#     }
-#     return jsonify(response), 500
+
+@app.errorhandler(Exception)
+def handle_exception(error):
+    print(error)
+    response = {
+        "error": "An unexpected error occurred.",
+        "message": str(error)
+    }
+    return jsonify(response), 500
+
 
 facade = LibraryFacadeSingleton
 
