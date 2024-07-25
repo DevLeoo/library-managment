@@ -11,10 +11,8 @@ class BookCategory:
         self.books.append(book)
 
     def find_books(self, query):
-        # Busca livros na categoria atual
         results = [book for book in self.books if query.lower()
                    in book.title.lower()]
-        # Busca recursiva nas subcategorias
         for subcategory in self.subcategories:
             results.extend(subcategory.find_books(query))
         return results

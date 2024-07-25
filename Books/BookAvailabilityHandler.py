@@ -1,6 +1,6 @@
 from Borrow.BorrowRequestHandler import BorrowRequestHandler
 from typing import Optional
-from Book import Book
+from .Book import Book
 from Library.LibraryMediator import LibraryMediator
 
 

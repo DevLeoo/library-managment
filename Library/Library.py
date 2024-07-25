@@ -19,14 +19,14 @@ class Library:
         self.configuration_manager = ConfigurationManager()
         self.notifier = BookAvailabilityNotifier()
 
+    def find_all_books(self):
+        return self.root_category.books
+
     def get_configuration(self, key: str) -> any:
         return self.configuration_manager.get_setting(key)
 
     def set_configuration(self, key: str, value: any) -> None:
         self.configuration_manager.set_setting(key, value)
-
-    def add_book(self, book):
-        self.books.append(book)
 
     def add_user(self, user):
         self.users.append(user)
@@ -57,9 +57,22 @@ class Library:
     def add_book_to_category(self, book, category_name):
         category = self.find_category(self.root_category, category_name)
         if category:
+            print("1")
             category.add_book(book)
             self.notifier.notify(
                 f"New book arrived in our library: {book.title} by {book.author}")
+        else:
+            self.add_category(category_name)
+            print({
+                "title": book.title,
+                "author": book.author,
+                "category": book.category
+            })
+            self.root_category.add_book({
+                "title": book.title,
+                "author": book.author,
+                "category": book.category
+            })
 
     def search_books(self, query):
         results = self.root_category.find_books(query)

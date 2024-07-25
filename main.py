@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from Library.LibraryFacade import LibraryFacade
 
 app = Flask(__name__)
 
@@ -12,30 +13,27 @@ app = Flask(__name__)
 #     }
 #     return jsonify(response), 500
 
+facade = LibraryFacade()
+
 
 @app.route('/', methods=['GET'])
 def home():
     return "Hello, World!"
 
 
-@app.route('/api/book', methods=['GET'])
+@app.route('/api/books', methods=['GET'])
 def get_all_books():
-    df = pd.read_csv("./persistance/books.csv")
-    return jsonify(df.to_dict(orient='records'))
+    return jsonify(facade.find_all_Books())
 
 
-app.route('/api/book/loan', methods=['POST'])
-
-
-def rent_book():
-    # data = {"title": "1984"}
-    data = request.json
-    user = User("John Doe", 1)
-
-    lib_facade = LibraryFacade()
-    lib_facade.loan_book(data["title"], user)
-
-    return jsonify({"name": "successfuly rented"}), 201
+@app.route('/api/books', methods=['POST'])
+def register_book():
+    request_data = request.get_json()
+    title = request_data["title"]
+    author = request_data["author"]
+    category = request_data["category"]
+    facade.add_book(title, author, category)
+    return jsonify({"response": "book successfuly saved"}), 201
 
 
 if __name__ == '__main__':

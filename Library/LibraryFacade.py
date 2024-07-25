@@ -1,10 +1,9 @@
-from Library import Library
+from .Library import Library
 from Books.Book import Book
-from Users.User import User
 from Users.StudentUserType import StudentUserType
 from Users.TeacherUserType import TeacherUserType
-from LibraryMediator import LibraryMediator
-from typing import List, Optional
+from .LibraryMediator import LibraryMediator
+from typing import Optional
 
 
 class LibraryFacade:
@@ -33,6 +32,9 @@ class LibraryFacade:
 
     def add_category(self, category_name: str, parent_name: Optional[str] = None) -> None:
         self.mediator.add_category(category_name, parent_name)
+
+    def find_all_Books(self) -> None:
+        return self.mediator.find_all_books()
 
     def search_books(self, query: str) -> None:
         results = self.mediator.search_books(query)

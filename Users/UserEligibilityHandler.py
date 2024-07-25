@@ -1,6 +1,6 @@
 from Library.LibraryMediator import LibraryMediator
 from typing import Optional
-from User import User
+from .User import User
 from Borrow.BorrowRequestHandler import BorrowRequestHandler
 
 

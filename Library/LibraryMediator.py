@@ -8,6 +8,9 @@ class LibraryMediator:
     def __init__(self, library: Library) -> None:
         self.library = library
 
+    def find_all_books(self) -> List[Book]:
+        return self.library.find_all_books()
+
     def search_books(self, query: str) -> List[Book]:
         return self.library.search_books(query)
 

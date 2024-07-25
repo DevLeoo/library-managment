@@ -1,4 +1,4 @@
-from BorrowRequestHandler import BorrowRequestHandler
+from .BorrowRequestHandler import BorrowRequestHandler
 from typing import Optional
 from Library.LibraryMediator import LibraryMediator
 from Users.User import User
