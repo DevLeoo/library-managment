@@ -63,6 +63,12 @@ def search_user(user_id):
     return jsonify(response), 201
 
 
+@app.route('/api/users/history/<user_id>', methods=['GET'])
+def get_user_history(user_id):
+    response = facade.get_user_history(user_id)
+    return jsonify(response), 201
+
+
 @app.route('/api/borrow/', methods=['POST'])
 def borrow_book():
     request_data = request.get_json()

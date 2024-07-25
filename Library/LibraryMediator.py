@@ -40,3 +40,6 @@ class LibraryMediator:
 
     def borrow_book_with_approval(self, user_id: int, book_title: str):
         return self.library.borrow_book_with_approval(user_id, book_title)
+
+    def get_user_history(self, user_id: str):
+        return self.library.get_user_history(user_id)

@@ -72,6 +72,9 @@ class LibraryFacade:
         else:
             print(f"Failed to return book '{book_title}'.")
 
+    def get_user_history(self, user_id):
+        return self.mediator.get_user_history(user_id)
+
     def print_categories(self):
         self.library_system.print_categories()
 

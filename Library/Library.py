@@ -94,3 +94,12 @@ class Library:
                     f"Book returned: {book.get('title', '')} by {user.name}")
             return has_returned
         return False
+
+    def get_user_history(self, user_id):
+        user = self.find_user(user_id)
+        if user:
+            return {
+                "borrowed_books": user.borrowed_books,
+                "returned_books": user.returned_books
+            }
+        return None

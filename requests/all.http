@@ -36,6 +36,7 @@ GET /api/users/find/1 HTTP/1.1
 Content-Type: application/json
 Host: localhost:3000
 
+
 ### 3 - BORROW BOOKS
 POST /api/borrow/ HTTP/1.1
 Content-Type: application/json
@@ -55,3 +56,8 @@ Host: localhost:3000
     "user_id": "1",
     "title": "DDD"
 }
+
+### 5 - GET USER HISTORY
+GET /api/users/history/1 HTTP/1.1
+Content-Type: application/json
+Host: localhost:3000

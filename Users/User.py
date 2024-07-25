@@ -10,6 +10,7 @@ class User(Observer):
         self.name = name
         self.user_type = user_type
         self.borrowed_books: List[Book] = []
+        self.returned_books: List[Book] = []
 
     @abstractmethod
     def borrow_limit(self) -> int:
@@ -32,5 +33,6 @@ class User(Observer):
         if book in self.borrowed_books:
             self.borrowed_books.remove(book)
             book['is_available'] = True
+            self.returned_books.append(book)
             return True
         return False
